@@ -42,7 +42,9 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 <p align = "center">
     <img src="https://github.com/enescelebii/laboratory-reporting-app/blob/main/uploaded-files/1.png">
 </p>
-
+<p align = "center">
+    <img src="https://github.com/enescelebii/laboratory-reporting-app/blob/main/uploaded-files/2.png">
+</p>
 
 ## Kullanım
 - **GET** request - localhost:8080/api/laborants/2
