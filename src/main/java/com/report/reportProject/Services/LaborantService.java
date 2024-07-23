@@ -32,8 +32,8 @@ public class LaborantService implements LaborantServiceInterface{
     }
 
     @Override
-    public void SaveLaborant(Laborant lab) {
-        laborantDAO.save(lab);
+    public Laborant SaveLaborant(Laborant lab) {
+        return laborantDAO.save(lab);
     }
 
     @Override

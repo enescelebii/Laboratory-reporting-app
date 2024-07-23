@@ -1,11 +1,14 @@
 package com.report.reportProject.Rest;
 
 import com.report.reportProject.Entity.Laborant;
+import com.report.reportProject.Entity.Report;
 import com.report.reportProject.Services.LaborantService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -34,6 +37,30 @@ public class LaborantConroller {
         laborantService.SaveLaborant(laborant);
         return ResponseEntity.ok(laborant);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Laborant> updateLaborant(@PathVariable int id, @RequestBody Laborant updatedLaborant) {
+        // Mevcut Laborant'ı al
+        Laborant existingLaborant = laborantService.getLaborantById(id);
+        if (existingLaborant == null) {
+            return ResponseEntity.notFound().build(); // 404 Not Found döndürür
+        }
+
+        // Gelen laborant'ın ID'sini mevcut laborant'ın ID'si ile eşitle
+        updatedLaborant.setId(id);
+
+        // Mevcut laborant'taki sadece gerekli alanları güncelle
+        existingLaborant.setFirstName(updatedLaborant.getFirstName()); // İsim güncelleme
+        existingLaborant.setLastName(updatedLaborant.getLastName()); // Soyisim güncelleme
+
+        // Güncellenmiş laborant'ı kaydet
+        Laborant savedLaborant = laborantService.SaveLaborant(existingLaborant);
+
+        return ResponseEntity.ok(savedLaborant); // 200 OK ve güncellenmiş laborant'ı döndürür
+    }
+
+
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Laborant> deleteLaborant(@PathVariable int id) {
         laborantService.deleteLaborant(id);

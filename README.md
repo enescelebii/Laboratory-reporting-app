@@ -178,8 +178,6 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 | ----------- | ---------------------------------- | -----------------------------------------------------------|
 | GET         | /api/laborants                     | Retrieve all lab Laborants                                 |
 | GET         | /api/laborants/{id}                | Retrieve a specific lab Laborants by its ID                |
-| GET         | /api/laborants/search              | Search for Laborant by first name and last name parameters |
-| GET         | /api/laborants/search/{hospitalId} | Search for Laborant by hospital ID                         |
 | POST        | /api/laborants                     | Create a new lab Laborant                                  |
 | PUT         | /api/laborants/{id}                | Update an existing lab Laborant                            |
 | DELETE      | /api/laborants/{id}                | Delete a specific lab Laborant by its ID                   |

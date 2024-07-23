@@ -10,7 +10,7 @@ public interface RaportServiceInterface {
 
     Report getReportById(int id);
 
-    void saveReport(Report report);
+    Report saveReport(Report report);
 
     void deleteReport(int id);
 

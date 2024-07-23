@@ -11,6 +11,6 @@ public interface LaborantDAO {
 
     List<Laborant> findAll();
     Laborant findById(int id);
-    void save(Laborant lab);
+    Laborant save(Laborant lab);
     void delete(int id);
 }

@@ -31,8 +31,8 @@ public class LaborantDAOImpl implements LaborantDAO {
 
     @Override
     @Transactional
-    public void save(Laborant lab) {
-        entityManager.merge(lab);
+    public Laborant save(Laborant lab) {
+        return entityManager.merge(lab);
     }
 
     @Override
@@ -43,4 +43,5 @@ public class LaborantDAOImpl implements LaborantDAO {
             entityManager.remove(laborant);
         }
     }
+
 }

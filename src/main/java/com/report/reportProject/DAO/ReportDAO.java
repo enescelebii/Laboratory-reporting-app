@@ -16,7 +16,7 @@ public interface ReportDAO {
     Report findReportById(int id);
     // update ve create kısımları save fonksiyonu ile yapılmakta
     // eger id = 0 ise create çalışacaktır farklı bir id varsa update olur
-    void saveReport(Report report);
+    Report saveReport(Report report);
     // id ile silim işlemi
     void deleteReport(int id);
     //detaylı arama

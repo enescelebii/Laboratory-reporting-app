@@ -9,7 +9,7 @@ public interface LaborantServiceInterface {
 
     Laborant getLaborantById(int id);
 
-    void SaveLaborant(Laborant lab);
+    Laborant SaveLaborant(Laborant lab);
 
     void deleteLaborant(int id);
 }

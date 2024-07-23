@@ -15,6 +15,7 @@ public class Laborant {
 
 
     // database tarafından oluşturulan laborant id numarası
+    @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -73,7 +73,7 @@ public class ReportService implements RaportServiceInterface{
 
     @Override
     @Transactional
-    public void saveReport(Report report) {
+    public Report saveReport(Report report) {
         if (report.getLaborant() != null){
             Laborant laborant = laborantDAO.findById(report.getLaborant().getId());
             if (laborant == null){
@@ -81,7 +81,7 @@ public class ReportService implements RaportServiceInterface{
             }// eger laborant yoksa hata çıkacaktır bu yuzden once laborantın oluşturulması gerek
             //çunku Laborantsız rapor olama
         }
-        reportDAO.saveReport(report);
+        return reportDAO.saveReport(report);
     }
 
     @Override

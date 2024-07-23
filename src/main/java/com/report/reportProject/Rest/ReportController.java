@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -116,6 +117,51 @@ public class ReportController {
         return ResponseEntity.ok(reports); // ok fonksşiyonu ile 200 http kodu gondererek basarılı demis olduk
 
     }
+
+
+    /*@PutMapping("/{id}")
+    public Report updateReport(@PathVariable int id, @RequestBody Report updatedReport) {
+        Report existingReport = reportService.getReportById(id);
+        if (existingReport == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        Report Report = reportService.saveReport(updatedReport);
+        return Report;
+    }*/
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Report> updateReport(@PathVariable int id, @RequestBody Report updatedReport) {
+        // Mevcut Report'ı al
+        Report existingReport = reportService.getReportById(id);
+        if (existingReport == null) {
+            return ResponseEntity.notFound().build(); // 404 Not Found döndürür
+        }
+
+        // Laborant'ı güncelle
+        Laborant existingLaborant = laborantService.getLaborantById(updatedReport.getLaborant().getId());
+        if (existingLaborant == null) {
+            return ResponseEntity.badRequest().build(); // Laborant bulunamazsa 400 Bad Request döndürür
+        }
+
+        // Güncellenmiş report'ı mevcut report ile güncelle
+        existingReport.setDiagnosisTitle(updatedReport.getDiagnosisTitle());
+        existingReport.setDiagnosisDetails(updatedReport.getDiagnosisDetails());
+        existingReport.setReportDate(updatedReport.getReportDate());
+        existingReport.setLaborant(existingLaborant);
+
+        // Güncellenmiş report nesnesini kaydet
+        Report savedReport = reportService.saveReport(existingReport);
+
+        return ResponseEntity.ok(savedReport); // 200 OK ve güncellenmiş report döndürür
+    }
+
+
+    // Employee dbEmployee = employeeService.save(theEmployee);
+    //    return dbEmployee;
+
+
+
+
 
     @GetMapping("/asc")
     public List<Report> ascReport() {

@@ -44,11 +44,11 @@ public class ReportDAOImpl implements ReportDAO {
 
     @Override
     @Transactional // veri yazmamızı sağlayacak
-    public void saveReport(Report report) {
+    public Report saveReport(Report report) {
         // eger gelen raporda id = 0 ise
         // yeni bir rapor oluşturulur değilse uzerine yazılır update gibi
         // databaseye veri yazma
-        entityManager.merge(report);
+         return entityManager.merge(report);
     }
 
     @Override
