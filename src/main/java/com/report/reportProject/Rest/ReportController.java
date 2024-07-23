@@ -137,17 +137,11 @@ public class ReportController {
             return ResponseEntity.notFound().build(); // 404 Not Found döndürür
         }
 
-        // Laborant'ı güncelle
-        Laborant existingLaborant = laborantService.getLaborantById(updatedReport.getLaborant().getId());
-        if (existingLaborant == null) {
-            return ResponseEntity.badRequest().build(); // Laborant bulunamazsa 400 Bad Request döndürür
-        }
 
         // Güncellenmiş report'ı mevcut report ile güncelle
         existingReport.setDiagnosisTitle(updatedReport.getDiagnosisTitle());
         existingReport.setDiagnosisDetails(updatedReport.getDiagnosisDetails());
         existingReport.setReportDate(updatedReport.getReportDate());
-        existingReport.setLaborant(existingLaborant);
 
         // Güncellenmiş report nesnesini kaydet
         Report savedReport = reportService.saveReport(existingReport);
