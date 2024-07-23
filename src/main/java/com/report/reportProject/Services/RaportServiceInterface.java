@@ -15,4 +15,6 @@ public interface RaportServiceInterface {
     void deleteReport(int id);
 
     List<Report> searchReports(String patientFirstName, String patientLastName, String patientIdentityNumber, String laborantFirstName, String laborantLastName);
+
+    List<Report> getAllReportsByAsc();
 }

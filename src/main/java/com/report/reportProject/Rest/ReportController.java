@@ -117,5 +117,10 @@ public class ReportController {
 
     }
 
+    @GetMapping("/asc")
+    public List<Report> ascReport() {
+        return reportService.getAllReportsByAsc();
+    }
+
 }
 

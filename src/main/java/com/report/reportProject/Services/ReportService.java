@@ -93,4 +93,11 @@ public class ReportService implements RaportServiceInterface{
     public List<Report> searchReports(String patientFirstName, String patientLastName, String patientIdentityNumber, String laborantFirstName, String laborantLastName) {
         return reportDAO.searchReports(patientFirstName, patientLastName, patientIdentityNumber, laborantFirstName, laborantLastName);
     }
+
+    @Override
+    public List<Report> getAllReportsByAsc() {
+        return reportDAO.findAllByOrderByReportDateAsc();
+    }
+
+
 }
