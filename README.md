@@ -159,7 +159,6 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 | GET         | /api/reports      | Retrieve all reports                                   |
 | GET         | /api/reports/{id} | Retrieve a specific report by its ID                   |
 | GET         | /api/reports/asc  | Retrieve all reports in ascending order by report date |
-| GET         | /api/reports/desc | Retrieve all reports in descending order by report date|
 | POST        | /api/reports      | Create a new report                                    |
 | PUT         | /api/reports/{id} | Update an existing report                              |
 | DELETE      | /api/reports/{id} | Delete a specific report by its ID                     |
@@ -177,10 +176,10 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 
 | HTTP Method | Endpoint                           | Description                                                  |
 | ----------- | ---------------------------------- | -------------------------------------------------------------|
-| GET         | /api/laborants                     | Retrieve all lab technicians                                 |
-| GET         | /api/laborants/{id}                | Retrieve a specific lab technician by its ID                 |
-| GET         | /api/laborants/search              | Search for technician by first name and last name parameters |
-| GET         | /api/laborants/search/{hospitalId} | Search for technician by hospital ID                         |
-| POST        | /api/laborants                     | Create a new lab technician                                  |
-| PUT         | /api/laborants/{id}                | Update an existing lab technician                            |
-| DELETE      | /api/laborants/{id}                | Delete a specific lab technician by its ID                   |
+| GET         | /api/laborants                     | Retrieve all lab Laborants                                 |
+| GET         | /api/laborants/{id}                | Retrieve a specific lab Laborants by its ID                 |
+| GET         | /api/laborants/search              | Search for Laborant by first name and last name parameters |
+| GET         | /api/laborants/search/{hospitalId} | Search for Laborant by hospital ID                         |
+| POST        | /api/laborants                     | Create a new lab Laborant                                  |
+| PUT         | /api/laborants/{id}                | Update an existing lab Laborant                            |
+| DELETE      | /api/laborants/{id}                | Delete a specific lab Laborant by its ID                   |
