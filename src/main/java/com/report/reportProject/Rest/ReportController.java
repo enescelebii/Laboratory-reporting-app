@@ -98,7 +98,7 @@ public class ReportController {
         }
     }
     @GetMapping("/{id}/image")// bu kısım uploadlanmış resimleri göruntuleme kısmı // bu kodu değiştirdim yeni versiyonu bu
-    public ResponseEntity<Resource> serveFile(@PathVariable int id) {
+    public ResponseEntity<Resource> uploadFile(@PathVariable int id) {
         try {
             Report report = reportService.getReportById(id);
             if (report == null || report.getReportImagePath()==null) { // rapor olabilir fakat resim olmayabilir

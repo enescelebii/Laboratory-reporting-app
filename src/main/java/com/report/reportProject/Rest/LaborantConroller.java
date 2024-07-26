@@ -52,6 +52,7 @@ public class LaborantConroller {
         existingLaborant.setFirstName(updatedLaborant.getFirstName()); // İsim güncelleme
         existingLaborant.setLastName(updatedLaborant.getLastName()); // Soyisim güncelleme
 
+
         // Güncellenmiş laborant'ı kaydet
         Laborant savedLaborant = laborantService.SaveLaborant(existingLaborant);
 

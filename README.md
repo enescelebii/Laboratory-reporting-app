@@ -50,6 +50,65 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 </p>
 
 ## Kullanım
+**Öncelik**
+- Rapor eklemeden önce bir laborant eklemeliyiz çünkü laborantsız rapor olmamakta fakat raporsuz laborant olabilir
+
+#### Laborant Ekleme
+
+- **URL:** `/api/laborants`
+- **Method:** `POST`
+- **Body:**
+    ```json
+    {
+        "firstName": "Ahmet",
+        "lastName": "Yılmaz",
+        "hospitalIdentityNumber": "1234567"
+    }
+    ```
+
+#### Rapor Ekleme
+- Lütfen eklediğiniz laborantın id sini kontrol ediniz
+- **URL:** `/api/reports`
+- **Method:** `POST`
+- **Body:**
+    ```json
+    {
+        "fileNumber": "12345",
+        "patientFirstName": "Enes",
+        "patientLastName": "Celebi",
+        "patientIdentityNumber": "98765432101",
+        "diagnosisTitle": "Grip",
+        "diagnosisDetails": "Hafif grip belirtileri.",
+        "reportDate": "2024-07-22",
+        "laborantId": 1
+    }
+    ```
+
+#### Rapor Dosyası Yükleme
+- Dosyayı yüklemek için POSTMAN da body->from-data->key kısmına file yazmanız gerekmekte
+- **URL:** `/api/reports/{id}/upload`
+- **Method:** `POST`
+- **Form-Data:**
+    - `file`: (rapor dosyası)
+
+#### Raporları Listeleme
+
+- **URL:** `/api/reports`
+- **Method:** `GET`
+
+#### Rapor Arama
+
+- **URL:** `/api/reports/search`
+- **Method:** `GET`
+- **Query Params:**
+    - `patientFirstName` (opsiyonel)
+    - `patientLastName` (opsiyonel)
+    - `patientIdentityNumber` (opsiyonel)
+    - `laborantFirstName` (opsiyonel)
+    - `laborantLastName` (opsiyonel)
+
+### Örnekler
+
 - **GET** request - `localhost:8080/api/laborants/2`
 - Response HTTP with status 200 OK
 ```json
@@ -96,60 +155,6 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
     }
 ]
 ```
-#### Laborant Ekleme
-
-- **URL:** `/api/laborants`
-- **Method:** `POST`
-- **Body:**
-    ```json
-    {
-        "firstName": "Ahmet",
-        "lastName": "Yılmaz",
-        "hospitalIdentityNumber": "1234567890"
-    }
-    ```
-
-#### Rapor Ekleme
-
-- **URL:** `/api/reports`
-- **Method:** `POST`
-- **Body:**
-    ```json
-    {
-        "fileNumber": "12345",
-        "dia": "Enes",
-        "patientLastName": "Celebi",
-        "patientIdentityNumber": "98765432101",
-        "diagnosisTitle": "Grip",
-        "diagnosisDetails": "Hafif grip belirtileri.",
-        "reportDate": "2024-07-22",
-        "laborantId": 2
-    }
-    ```
-
-#### Rapor Dosyası Yükleme
-- Dosyayı yüklemek için POSTMAN da body->from-data->key kısmına file yazmanız gerekmekte
-- **URL:** `/api/reports/{id}/upload`
-- **Method:** `POST`
-- **Form-Data:**
-    - `file`: (rapor dosyası)
-
-#### Raporları Listeleme
-
-- **URL:** `/api/reports`
-- **Method:** `GET`
-
-#### Rapor Arama
-
-- **URL:** `/api/reports/search`
-- **Method:** `GET`
-- **Query Params:**
-    - `patientFirstName` (opsiyonel)
-    - `patientLastName` (opsiyonel)
-    - `patientIdentityNumber` (opsiyonel)
-    - `laborantFirstName` (opsiyonel)
-    - `laborantLastName` (opsiyonel)
-
 
 ## Endpoints
 ### Report

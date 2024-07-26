@@ -26,7 +26,8 @@ public class Laborant {
     @Column(name = "last_name",nullable = false)
     private String lastName;
     // hastane numarası
-    @Column(name = "hospital_identity_number",nullable = false, unique = true)
+    @Column(name = "hospital_identity_number",nullable = false, unique = true , length = 7)
+
     private String hospitalIdentityNumber;
 
     // her labrant birden fazla rapora sahip olabilir (-<)
