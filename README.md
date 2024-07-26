@@ -76,9 +76,7 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 - **GET** request - `localhost:8080/api/reports/9999`
 - Response with HTTP status 404 NOT FOUND
 ```json
-[
-	"Rapor bulunamadı"
-]
+"Rapor bulunamadı"
 ```
 
 - **GET** request - `localhost:8080/api/reports/search?patientFirstName=Enes`
