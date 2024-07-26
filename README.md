@@ -20,7 +20,7 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 
 1. Bu projeyi yerel makinenize klonlayın:
     ```sh
-    git clone https://github.com/kullanici_adi/laboratory-reporting-app.git
+    git clone https://github.com/enescelebii/laboratory-reporting-app.git
     ```
 
 2. Proje dizinine gidin:
@@ -50,7 +50,7 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 </p>
 
 ## Kullanım
-- **GET** request - localhost:8080/api/laborants/2
+- **GET** `request - localhost:8080/api/laborants/2`
 - Response HTTP with status 200 OK
 ```json
 {
@@ -73,11 +73,11 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
     ]
 }
 ```
-- **GET** request - localhost:8080/reports/9999
-- Response with HTTP status 204 No content
+- **GET** `request - localhost:8080/api/reports/9999`
+- Response with HTTP status 404 NOT FOUND
 - "Rapor bulunamadı"
 
-- **GET** request - localhost:8080/api/reports/search?patientFirstName=Enes
+- **GET** `request - localhost:8080/api/reports/search?patientFirstName=Enes`
 - Response with HTTP status 200 OK
 ```json
 [
