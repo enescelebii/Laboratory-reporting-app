@@ -67,10 +67,10 @@ public class ReportDAOImpl implements ReportDAO {
     @Override
     public List<Report> searchReports(String patientFirstName, String patientLastName, String patientIdentityNumber, String laborantFirstName, String laborantLastName) {
 
-        StringBuilder queryStr = new StringBuilder("FROM Report r WHERE 1=1 ");
+        StringBuilder queryStr = new StringBuilder("FROM Report r WHERE 1=1 ");// bir query collectionunu database SQL kodumuz ile alacağız
 
         if (patientFirstName != null && !patientFirstName.isEmpty()) {
-            queryStr.append("AND r.patientFirstName LIKE :patientFirstName ");
+            queryStr.append("AND r.patientFirstName LIKE :patientFirstName "); // append ile query e verilerimiz eğer isteniyorsa ekleniyor
         }
         if (patientLastName != null && !patientLastName.isEmpty()) {
             queryStr.append("AND r.patientLastName LIKE :patientLastName ");
@@ -85,10 +85,10 @@ public class ReportDAOImpl implements ReportDAO {
             queryStr.append("AND r.laborant.lastName LIKE :laborantLastName ");
         }
 
-        TypedQuery<Report> query = entityManager.createQuery(queryStr.toString(), Report.class);
+        TypedQuery<Report> query = entityManager.createQuery(queryStr.toString(), Report.class); // diziye çevirmek için typedQuery haline getiriyoruz
 
         if (patientFirstName != null && !patientFirstName.isEmpty()) {
-            query.setParameter("patientFirstName", "%" + patientFirstName + "%");
+            query.setParameter("patientFirstName", "%" + patientFirstName + "%");   // verileri parametrelere eşleştiriyoruz
         }
         if (patientLastName != null && !patientLastName.isEmpty()) {
             query.setParameter("patientLastName", "%" + patientLastName + "%");
@@ -103,7 +103,7 @@ public class ReportDAOImpl implements ReportDAO {
             query.setParameter("laborantLastName", "%" + laborantLastName + "%");
         }
 
-        return query.getResultList();
+        return query.getResultList(); // diziye çevirdik
     }
 
     // query ismindeki raporumuza detayları verileri ekledik şimdi dödurelim

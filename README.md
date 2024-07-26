@@ -148,12 +148,8 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
     - `laborantFirstName` (opsiyonel)
     - `laborantLastName` (opsiyonel)
 
-## Endpoints
 
-- [Report](#report)
-- [ReportImage](#reportimage)
-- [Laborants](#laborants)
-
+#### Endpoints
 ### Report
 
 
@@ -173,6 +169,8 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 | ----------- | -------------------------- | ------------------------------------------- |
 | GET         | /api/reports/{id}/image    | Retrieve a report image by report Id        |
 | POST        | /api/reports/{id}/upload   | Upload a new report image                   |
+
+- **NOT:** `Postman için upload yapılacak dosyayı ekledikten sonra key kısmına 'file' yazmanız gerekmektedir
 
 
 ### Laborants

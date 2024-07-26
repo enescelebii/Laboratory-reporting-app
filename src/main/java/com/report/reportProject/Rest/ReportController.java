@@ -34,7 +34,7 @@ public class ReportController {
     @Autowired
     private LaborantService laborantService;
 
-    @Value("${file.upload-dir}")
+    @Value("${file.upload-dir}")// dosyaların yolunu veriyoruz
     private String uploadDir;
 
 
@@ -127,7 +127,7 @@ public class ReportController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         catch (IOException e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);//probeContentType için gerekli catch bloğu
         }
         /*Path file = Paths.get(uploadDir).resolve(fileName);// yolu alıp bir String haline geitirip sunmamız gerek
         Resource resource = (Resource) new UrlResource(file.toUri());
@@ -143,7 +143,7 @@ public class ReportController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity< List<Report>> searchReport(
+    public ResponseEntity< List<Report>> searchReport(// opsiyonel verilen datalar ile query sınaması yapicak DAO kısmında kodu görebilirsiniz
                                      @RequestParam(required = false) String patientFirstName,
                                      @RequestParam(required = false) String patientLastName,
                                      @RequestParam(required = false) String patientIdentityNumber,
