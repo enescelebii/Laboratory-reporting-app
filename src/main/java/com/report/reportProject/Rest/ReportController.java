@@ -5,18 +5,20 @@ import com.report.reportProject.Entity.Laborant;
 import com.report.reportProject.Entity.Report;
 import com.report.reportProject.Services.LaborantService;
 import com.report.reportProject.Services.ReportService;
-import jakarta.annotation.Resource;
+import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
+
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -38,14 +40,16 @@ public class ReportController {
 
     @GetMapping
     public List<Report> getReports() {
-        List<Report> reports = reportService.getAllReports();
-        return reports;
+        return reportService.getAllReports();
     }
 
     @GetMapping("/{id}")
-    public Report getReport(@PathVariable int id) {
+    public ResponseEntity<?> getReport(@PathVariable int id) {
         Report report = reportService.getReportById(id);
-        return report;
+        if (report == null){
+            return new ResponseEntity<>("Rapor bulunamadı", HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(report);
     }
 
   /*  @PostMapping
@@ -83,19 +87,51 @@ public class ReportController {
 
     // image upload kısmı
     @PostMapping("/{id}/upload")// upload yapacagımız url yolu
-    public ResponseEntity<String> uploadReport(@PathVariable int id, @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> uploadReport(@PathVariable int id, @RequestParam("file") MultipartFile file) {
         try {// http durumunu guncellemek için oluştuurlan webden yakalanan dosyanın başarılı olup olmadıgının kontrolu
             String fileName = reportService.saveReportImage(id, file);// service dosyasından fonksiyonlarımız ile db ye kaydetme
             return ResponseEntity.ok(fileName);
         }catch(IOException e) {// başarısız olan yukleme sonrası cıkan hata ve kodunu gonderme
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Dosya Yükleme başarısız");
+            return new ResponseEntity<>("Dosya yüklenemedi",HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch(IllegalArgumentException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping("/files/{fileName:.+}")// bu kısım uploadlanmış resimleri göruntuleme kısmı
-    public ResponseEntity<Resource> serveFile(@PathVariable String fileName) throws MalformedURLException {
-        Path file = Paths.get(uploadDir).resolve(fileName);// yolu alıp bir String haline geitirip sunmamız gerek
+    @GetMapping("/{id}/image")// bu kısım uploadlanmış resimleri göruntuleme kısmı // bu kodu değiştirdim yeni versiyonu bu
+    public ResponseEntity<Resource> serveFile(@PathVariable int id) {
+        try {
+            Report report = reportService.getReportById(id);
+            if (report == null || report.getReportImagePath()==null) { // rapor olabilir fakat resim olmayabilir
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            Path file = Paths.get(uploadDir).resolve(report.getReportImagePath());
+            //yüklenen dosyanın temsili olan bir path objesi oluşturur
+            //Resource resource = new UrlResource(file.toUri());
+            //file nesnesini uniform resource ıdentifier yani dosya yolunun bir url temsili haline getirir
+            if (!Files.exists(file) || !Files.isReadable(file)){// dosyadaki okunamazlık ve olmama durumundaki hata
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            Resource resource = new UrlResource(file.toUri());
+            /*urlresource objesini ust sınıf olan resourceye çevirmemiz gerek*/
+            // SubClass -> superClass UPCASTİNG yapıyoruz yani
+
+            String DosyaTuru = Files.probeContentType(file);
+            // bu kod gelen verinin hangi türde oldugunu saptar ve dosyayı görebilmezi sağlar
+
+            return ResponseEntity.ok().contentType(MediaType.parseMediaType(DosyaTuru)).body(resource);
+            //medya dosyasını gösterricez ve http kodunu başarılı ayarlayalım tarayıcıya medya tipini de göndermiş olduk
+
+
+        } catch (MalformedURLException e) {// malformed urllerin oluşturulması sırasında çıkan hataları için kullanılıyor
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch (IOException e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        /*Path file = Paths.get(uploadDir).resolve(fileName);// yolu alıp bir String haline geitirip sunmamız gerek
         Resource resource = (Resource) new UrlResource(file.toUri());
-        return ResponseEntity.ok().body(resource);
+        return ResponseEntity.ok().body(resource);*/
     }
 
 
@@ -107,7 +143,8 @@ public class ReportController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity< List<Report>> searchReport(@RequestParam(required = false) String patientFirstName,
+    public ResponseEntity< List<Report>> searchReport(
+                                     @RequestParam(required = false) String patientFirstName,
                                      @RequestParam(required = false) String patientLastName,
                                      @RequestParam(required = false) String patientIdentityNumber,
                                      @RequestParam(required = false) String laborantFirstName,
@@ -148,14 +185,6 @@ public class ReportController {
 
         return ResponseEntity.ok(savedReport); // 200 OK ve güncellenmiş report döndürür
     }
-
-
-    // Employee dbEmployee = employeeService.save(theEmployee);
-    //    return dbEmployee;
-
-
-
-
 
     @GetMapping("/asc")
     public List<Report> ascReport() {

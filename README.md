@@ -68,16 +68,16 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
             "diagnosisTitle": "Grip",
             "diagnosisDetails": "Hafif grip belirtileri.",
             "reportDate": "2024-07-22",
-            "reportImagePath": ExampleImage.png
+            "reportImagePath": a7535100-8e48-4b9c-9e54-e5253aff80b6_ExampleImage.png
         }
     ]
 }
 ```
-- **GET** request - localhost:8080/raports/9999
+- **GET** request - localhost:8080/reports/9999
 - Response with HTTP status 204 No content
 - "Rapor bulunamadı"
 
-- **GET** request - localhost:8080/patients/search?patientFirstName=Enes
+- **GET** request - localhost:8080/api/reports/search?patientFirstName=Enes
 - Response with HTTP status 200 OK
 ```json
 [
@@ -90,7 +90,7 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
         "diagnosisTitle": "Grip",
         "diagnosisDetails": "Hafif grip belirtileri.",
         "reportDate": "2024-07-22",
-        "reportImagePath": ExampleImage.png
+        "reportImagePath": a7535100-8e48-4b9c-9e54-e5253aff80b6_ExampleImage.png
     }
 ]
 ```
@@ -115,7 +115,7 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
     ```json
     {
         "fileNumber": "12345",
-        "patientFirstName": "Enes",
+        "dia": "Enes",
         "patientLastName": "Celebi",
         "patientIdentityNumber": "98765432101",
         "diagnosisTitle": "Grip",
@@ -126,7 +126,7 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
     ```
 
 #### Rapor Dosyası Yükleme
-
+- Dosyayı yüklemek için POSTMAN da body->from-data->key kısmına file yazmanız gerekmekte
 - **URL:** `/api/reports/{id}/upload`
 - **Method:** `POST`
 - **Form-Data:**
@@ -169,18 +169,18 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 
 ### ReportImage
 
-| HTTP Method | Endpoint                        | Description                                 |
-| ----------- | ------------------------------- | ------------------------------------------- |
-| GET         | /api/reports/{id}/files/image   | Retrieve a report image by report Id        |
-| POST        | /api/reports/{id}/upload        | Upload a new report image                   |
+| HTTP Method | Endpoint                   | Description                                 |
+| ----------- | -------------------------- | ------------------------------------------- |
+| GET         | /api/reports/{id}/image    | Retrieve a report image by report Id        |
+| POST        | /api/reports/{id}/upload   | Upload a new report image                   |
 
 
 ### Laborants
 
-| HTTP Method | Endpoint                           | Description                                                |
-| ----------- | ---------------------------------- | -----------------------------------------------------------|
-| GET         | /api/laborants                     | Retrieve all lab Laborants                                 |
-| GET         | /api/laborants/{id}                | Retrieve a specific lab Laborants by its ID                |
-| POST        | /api/laborants                     | Create a new lab Laborant                                  |
-| PUT         | /api/laborants/{id}                | Update an existing lab Laborant                            |
-| DELETE      | /api/laborants/{id}                | Delete a specific lab Laborant by its ID                   |
+| HTTP Method | Endpoint             | Description                                                |
+| ----------- | -------------------- | -----------------------------------------------------------|
+| GET         | /api/laborants       | Retrieve all lab Laborants                                 |
+| GET         | /api/laborants/{id}  | Retrieve a specific lab Laborants by its ID                |
+| POST        | /api/laborants       | Create a new lab Laborant                                  |
+| PUT         | /api/laborants/{id}  | Update an existing lab Laborant                            |
+| DELETE      | /api/laborants/{id}  | Delete a specific lab Laborant by its ID                   |

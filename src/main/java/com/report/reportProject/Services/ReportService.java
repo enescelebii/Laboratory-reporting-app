@@ -41,7 +41,11 @@ public class ReportService implements RaportServiceInterface{
     public String saveReportImage(int reportId, MultipartFile file)throws IOException {
         Report report = reportDAO.findReportById(reportId);
         if(report==null) {
-            return "Report Not Found";
+            return "Rapor bulunamadı";
+        }
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("Dosya boş olamaz");
+
         }
         String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();//random isim ve orjinal ismin toplanması
         // bu kısım dosya adlarının çakışması için kullanılan bir fonksiyon

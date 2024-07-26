@@ -45,10 +45,10 @@ public class LaborantConroller {
             return ResponseEntity.notFound().build(); // 404 Not Found döndürür
         }
 
-        // Gelen laborant'ın ID'sini mevcut laborant'ın ID'si ile eşitle
+        // Gelen laborant'ın ID'sini mevcut laborant'ın ID'si ile eşitler
         updatedLaborant.setId(id);
 
-        // Mevcut laborant'taki sadece gerekli alanları güncelle
+        // Mevcut laborant'taki sadece gerekli alanları günceller
         existingLaborant.setFirstName(updatedLaborant.getFirstName()); // İsim güncelleme
         existingLaborant.setLastName(updatedLaborant.getLastName()); // Soyisim güncelleme
 
