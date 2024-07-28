@@ -71,7 +71,7 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 **Şifreler**
 - Şifrelerimiz BCRYPT ile encrypte edilmiş bir şekilde databaseye eklenmiştir spring boot JDBC ile Authorization'da girilen şifreyi BCRYPT ile encryptledikten sonra database ile karşılaştırıp erişimi sağlar
 
-**Varsayılan Şifre : 1234
+**Varsayılan Şifre : 1234**
 
 **Öncelik**
 - Rapor eklemeden önce bir laborant eklemeliyiz çünkü laborantsız rapor olmamakta fakat raporsuz laborant olabilir
