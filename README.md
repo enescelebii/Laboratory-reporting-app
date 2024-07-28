@@ -48,8 +48,31 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 <p align = "left">
     <img src="https://github.com/enescelebii/laboratory-reporting-app/blob/main/uploaded-files/3.png">
 </p>
+<p align = "left">
+    <img src="https://github.com/enescelebii/laboratory-reporting-app/blob/main/uploaded-files/5.png">
+</p>
+<p align = "left">
+    <img src="https://github.com/enescelebii/laboratory-reporting-app/blob/main/uploaded-files/4.png">
+</p>
 
 ## Kullanım
+
+#### SQL yapılandırma
+- SQL kodlarını sql-script dosyasında bulabilirsiniz
+
+#### Basic Authorization
+
+**Yetkiler**
+- Databaseye eklediğim 3 yetkilendirme sistemi mevcut
+- STANDART sadece `GET` Methodlarını kullanabilir
+- MODERATOR `GET , POST , PUT` Methodlarını kullanabilir
+- ADMIN `GET , POST , PUT , DELETE` Methodların hepsini kullanabilir
+
+**Şifreler**
+- Şifrelerimiz BCRYPT ile encrypte edilmiş bir şekilde databaseye eklenmiştir spring boot JDBC ile Authorization'da girilen şifreyi BCRYPT ile encryptledikten sonra database ile karşılaştırıp erişimi sağlar
+
+**Varsayılan Şifre : 1234
+
 **Öncelik**
 - Rapor eklemeden önce bir laborant eklemeliyiz çünkü laborantsız rapor olmamakta fakat raporsuz laborant olabilir
 

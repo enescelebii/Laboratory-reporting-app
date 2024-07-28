@@ -168,22 +168,25 @@ public class ReportController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Report> updateReport(@PathVariable int id, @RequestBody Report updatedReport) {
-        // Mevcut Report'ı al
+        // mevcut raporları alacagız
         Report existingReport = reportService.getReportById(id);
         if (existingReport == null) {
             return ResponseEntity.notFound().build(); // 404 Not Found döndürür
         }
 
 
-        // Güncellenmiş report'ı mevcut report ile güncelle
+        // guncellenenleri mevcut ile değistiriyoruz
+        existingReport.setPatientFirstName(updatedReport.getPatientFirstName());
+        existingReport.setPatientLastName(updatedReport.getPatientLastName());
+        existingReport.setPatientIdentityNumber(updatedReport.getPatientIdentityNumber());
         existingReport.setDiagnosisTitle(updatedReport.getDiagnosisTitle());
         existingReport.setDiagnosisDetails(updatedReport.getDiagnosisDetails());
         existingReport.setReportDate(updatedReport.getReportDate());
 
-        // Güncellenmiş report nesnesini kaydet
+        // kayıt işlemi
         Report savedReport = reportService.saveReport(existingReport);
 
-        return ResponseEntity.ok(savedReport); // 200 OK ve güncellenmiş report döndürür
+        return ResponseEntity.ok(savedReport); // 200 OK http status dondurur
     }
 
     @GetMapping("/asc")

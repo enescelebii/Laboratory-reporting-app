@@ -21,7 +21,7 @@ public class LaborantDAOImpl implements LaborantDAO {
 
     @Override
     public List<Laborant> findAll() {
-        TypedQuery<Laborant> query = entityManager.createQuery("FROM Laborant", Laborant.class);
+        TypedQuery<Laborant> query = entityManager.createQuery("FROM Laborant", Laborant.class);//SQL kodları ile erişim sağladık
         return query.getResultList();
     }
 

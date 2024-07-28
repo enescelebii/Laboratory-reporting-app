@@ -1,7 +1,7 @@
 package com.report.reportProject.DTO;
 
 
-public class ReportRequest {
+public class ReportRequest { // bu dosya search yapabilmemiz için spesifik istenen veya opsiyonel verilen dataları kullanabilmemiz için var
     private String fileNumber;
     private String patientFirstName;
     private String patientLastName;
