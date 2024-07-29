@@ -9,6 +9,7 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 - Raporları listeleme
 - Raporları arama
 - Rapor dosyasını yükleme ve görüntüleme
+- Basic Authorization
 
 ## Gereksinimler
 
@@ -70,6 +71,11 @@ Bu proje, Spring Boot kullanarak geliştirilmiş bir laboratuvar raporlama uygul
 
 **Şifreler**
 - Şifrelerimiz BCRYPT ile encrypte edilmiş bir şekilde databaseye eklenmiştir spring boot JDBC ile Authorization'da girilen şifreyi BCRYPT ile encryptledikten sonra database ile karşılaştırıp erişimi sağlar
+
+**Kullanıcı isimleri:**
+- standart
+- moderator
+- admin
 
 **Varsayılan Şifre : 1234**
 
